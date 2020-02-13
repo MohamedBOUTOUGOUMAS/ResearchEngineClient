@@ -1,11 +1,17 @@
-<ul>
-  <li *ngFor="let book of (books$ | async)">
-    <h3><span style="text-decoration: underline;">Title:</span> {{book.book.title}}</h3>
-    <h4><span style="text-decoration: underline;">Author:</span>  {{book.book.author}}</h4>
-    <ul>
-      <li *ngFor="let position of book.positions">
-        {{position.line}}
-      </li>
-    </ul>
-  </li>
-</ul>
+<app-form-research></app-form-research>
+<div class="container">
+  <ul>
+    <li *ngFor="let book of (books$ | async)"
+        style="margin-bottom: 10px">
+      <a href="" (click)="showDetails = book.book.title;
+                        $event.preventDefault()">
+        Title: {{book.book.title}}</a>
+      <ul *ngIf="showDetails === book.book.title">
+        <h4><span style="text-decoration: underline;">Author:</span>  {{book.book.author}}</h4>
+        <li *ngFor="let position of book.positions">
+          {{position.line}}
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IBook} from '../topics/IBook';
 
@@ -12,6 +12,8 @@ import {IBook} from '../topics/IBook';
 export class ResearchResultComponent implements OnInit {
 
   public books$: Observable<IBook>;
+  public showDetails: string;
+
 
   public constructor(private activatedRoute: ActivatedRoute, private http: HttpClient) {
   }
