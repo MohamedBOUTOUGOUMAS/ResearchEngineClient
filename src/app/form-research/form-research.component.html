@@ -1,6 +1,11 @@
-<div class="container" style="margin-top: 200px; margin-bottom: 20px">
+<div class="container"
+     [ngClass]="styles">
   <div class="input-group">
-    <input [(ngModel)] = "pattern" type="text" class="form-control" name="recherche" placeholder="recherche ...">
+    <input [(ngModel)] = "pattern"
+           type="text"
+           class="form-control"
+           name="recherche"
+           placeholder="recherche ...">
     <div class="input-group-append">
       <button type="button" class="btn btn-outline-secondary" (click)="navigateTo()">Rechercher</button>
     </div>
