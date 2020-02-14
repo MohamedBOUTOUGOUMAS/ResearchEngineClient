@@ -1,17 +1,26 @@
 <app-form-research [styles]="'marginTop-50'"></app-form-research>
 <div class="container">
-  <ul>
-    <li *ngFor="let book of (books$ | async)"
+  <ul style="list-style-type: none;">
+    <li *ngFor="let searchResult of (searchResults$ | async)"
         style="margin-bottom: 10px">
-      <a href="" (click)="showDetails = book.book.title;
+      <a href="" (click)="showDetails === searchResult.book.title ?
+                          showDetails = null : showDetails = searchResult.book.title;
                         $event.preventDefault()">
-        Title: {{book.book.title}}</a>
-      <ul *ngIf="showDetails === book.book.title">
-        <h4><span style="text-decoration: underline;">Author:</span>  {{book.book.author}}</h4>
-        <li *ngFor="let position of book.positions">
-          {{position.line}}
-        </li>
-      </ul>
+        {{searchResult.book.title}}</a>
+      <div class="container"
+           *ngIf="showDetails === searchResult.book.title"
+           style="margin-top: 10px">
+        <h6>Author: {{searchResult.book.author}}</h6>
+        <h6>Release date: {{searchResult.book.releaseDate}}</h6>
+        <a [routerLink]="['/search/book']" [queryParams]="{fileName: searchResult.book.fileName}">Voir le livre</a>
+        <div style="margin: 10px; text-align: justify">
+          <p class="row" style="margin: 0px;"
+             *ngFor="let position of searchResult.positions">
+            <span class="col-lg-2">Ligne {{position.nbLine}}</span>
+            <span class="col-lg-10">{{position.line}}</span>
+          </p>
+        </div>
+      </div>
     </li>
   </ul>
 </div>

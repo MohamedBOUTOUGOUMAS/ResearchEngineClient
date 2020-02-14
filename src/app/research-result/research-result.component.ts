@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {IBook} from '../topics/IBook';
+import {ISearchResult} from '../topics/Interfaces';
 
 @Component({
   selector: 'app-research-result',
@@ -11,7 +11,7 @@ import {IBook} from '../topics/IBook';
 })
 export class ResearchResultComponent implements OnInit {
 
-  public books$: Observable<IBook>;
+  public searchResults$: Observable<ISearchResult>;
   public showDetails: string;
 
 
@@ -19,9 +19,9 @@ export class ResearchResultComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.activatedRoute.queryParams.pipe ().subscribe(param => {
+    this.activatedRoute.queryParams.pipe().subscribe(param => {
       if (param.pattern) {
-        this.books$ = this.http.get<IBook>(`http://localhost:8080/research?pattern=${param.pattern}`);
+        this.searchResults$ = this.http.get<ISearchResult>(`http://localhost:8080/search?pattern=${param.pattern}`);
       }
     });
   }

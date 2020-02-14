@@ -1,22 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-form-research',
   templateUrl: './form-research.component.html',
   styleUrls: ['./form-research.component.scss']
 })
-export class FormResearchComponent implements OnInit{
+export class FormResearchComponent {
   @Input() styles: string;
   public pattern: string;
-
-  constructor(private router: Router) {
-  }
-  public ngOnInit(): void {}
-
-  public navigateTo() {
-    this.router.navigate(['/research'], {queryParams: { pattern: this.pattern }});
-  }
-
-
 }

@@ -9,6 +9,7 @@ import {ResearchPage} from "./research-page/research-page.component";
 
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {BookPage} from "./book-page/book-page.component";
 
 @NgModule({
   declarations: [
@@ -16,12 +17,14 @@ import {HttpClientModule} from '@angular/common/http';
       FormResearchComponent,
       ResearchResultComponent,
       ResearchPage,
+      BookPage
   ],
   imports: [
       BrowserModule,
       RouterModule.forRoot([
         {path: '', component: ResearchPage},
-        {path: 'research', component: ResearchResultComponent}
+        {path: 'search', component: ResearchResultComponent},
+        {path: 'search/book', component: BookPage}
       ]),
       HttpClientModule,
       FormsModule,
