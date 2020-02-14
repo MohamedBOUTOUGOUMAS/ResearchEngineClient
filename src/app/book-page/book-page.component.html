@@ -1,5 +1,6 @@
 <div class="container">
-    <p *ngFor="let element of (book$ | async)" style="text-align: center">
-        {{element}}
+    <p *ngFor="let line of book?.content"
+       style="text-align: justify"
+        [innerHTML]="line">
     </p>
 </div>

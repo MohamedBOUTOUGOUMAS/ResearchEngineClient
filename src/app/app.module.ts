@@ -5,11 +5,13 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { FormResearchComponent } from './form-research/form-research.component';
 import { ResearchResultComponent } from './research-result/research-result.component';
-import {ResearchPage} from "./research-page/research-page.component";
+import { ResearchPage } from "./research-page/research-page.component";
 
-import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import {BookPage} from "./book-page/book-page.component";
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BookPage } from "./book-page/book-page.component";
+import { SearchResultService } from "./services/search-result.service";
+import { ColorWord } from "./Pipes/color-word-matched.pipe";
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import {BookPage} from "./book-page/book-page.component";
       FormResearchComponent,
       ResearchResultComponent,
       ResearchPage,
-      BookPage
+      BookPage,
+      ColorWord
   ],
   imports: [
       BrowserModule,
@@ -29,7 +32,7 @@ import {BookPage} from "./book-page/book-page.component";
       HttpClientModule,
       FormsModule,
   ],
-  providers: [],
+  providers: [SearchResultService, ColorWord],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

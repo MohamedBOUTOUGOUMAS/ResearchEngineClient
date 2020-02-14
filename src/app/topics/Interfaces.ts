@@ -2,7 +2,8 @@ export interface IBook {
     title: string;
     author: string;
     fileName: string;
-    releaseDate: string
+    releaseDate: string;
+    content: string[];
 }
 
 export interface IPosition {
@@ -13,7 +14,7 @@ export interface IPosition {
     word: string;
 }
 
-export interface ISearchResult {
+export interface ISearchResult extends IBook {
     book: IBook;
     positions: Array<IPosition>;
 }

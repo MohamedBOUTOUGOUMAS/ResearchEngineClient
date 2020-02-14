@@ -1,7 +1,9 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
-import {Observable} from "rxjs";
-import {HttpClient} from '@angular/common/http';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { combineLatest, Observable } from "rxjs";
+import { SearchResultService } from "../services/search-result.service";
+import { IBook, ISearchResult } from "../topics/Interfaces";
+import { ColorWord } from "../Pipes/color-word-matched.pipe";
 
 
 @Component({
@@ -10,16 +12,23 @@ import {HttpClient} from '@angular/common/http';
     styleUrls: []
 })
 export class BookPage implements OnInit{
-    public book$: Observable<Array<string>>;
-
-    public constructor(private activatedRoute: ActivatedRoute, private http: HttpClient) {
-    }
+    public book$: Observable<IBook>;
+    public searchResults$: Observable<ISearchResult[]>;
+    public book: IBook;
+    public constructor(
+      private activatedRoute: ActivatedRoute,
+      private searchResultService: SearchResultService,
+      private colorWord: ColorWord
+    ) {}
 
     public ngOnInit(): void {
-        this.activatedRoute.queryParams.pipe().subscribe(param => {
+        this.activatedRoute.queryParams .pipe().subscribe(param => {
             if (param.fileName) {
-                console.log('param.fileName', param.fileName);
-                this.book$ = this.http.get<Array<string>>(`http://localhost:8080/search/book?fileName=${param.fileName}`);
+                this.book$ = this.searchResultService.getBook(`http://localhost:8080/search/book?fileName=${param.fileName}`);
+                this.searchResults$ = this.searchResultService.getSearchResultBook(param.fileName);
+                combineLatest(this.book$, this.searchResults$).subscribe(([book, searchResults]) => {
+                    this.book = this.colorWord.transform(book, searchResults);
+                });
             }
         });
     }
