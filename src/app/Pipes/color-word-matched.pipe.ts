@@ -5,14 +5,20 @@ import _ from "lodash";
   name: 'colorWord',
 })
 export class ColorWord implements PipeTransform {
+  private getSubString(line: string, from: number, to: number): string{
+    let str = "";
+    for(let i = from; i < to; i++){
+      str += line.charAt(i);
+    }
+    return str;
+  }
   transform(book: IBook, searchResults: ISearchResult[]): any {
     const searchResult = _.first(searchResults);
     searchResult.positions.forEach(position => {
       let line = book.content[position.nbLine-1];
-      const word = line.substr(position.initPos, position.endPos);
+      let word = this.getSubString(line, position.initPos, position.endPos);
       book.content[position.nbLine-1] = line.replace(word, `<span class='bg-danger text-white'>${word}</span>`);
     })
-    console.log('book', book);
     return book;
   }
 }

@@ -1,17 +1,19 @@
 <div class="container"
      [ngClass]="styles">
-  <div class="input-group">
-    <input [(ngModel)] = "pattern"
-           type="text"
-           class="form-control"
-           name="recherche"
-           placeholder="recherche ...">
-    <div class="input-group-append">
-      <button type="button"
-              class="btn btn-outline-secondary"
-              [routerLink]="['/search']" [queryParams]="{ pattern: pattern }">
-        Rechercher
-      </button>
+  <form>
+    <div class="input-group">
+      <input [(ngModel)] = "pattern"
+             type="text"
+             class="form-control"
+             name="recherche"
+             placeholder="recherche ...">
+      <div class="input-group-append">
+        <button type="submit"
+                class="btn btn-outline-secondary"
+                [routerLink]="['/search']" [queryParams]="{ pattern: pattern }">
+          Rechercher
+        </button>
+      </div>
     </div>
-  </div>
+  </form>
 </div>

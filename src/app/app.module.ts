@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BookPage } from "./book-page/book-page.component";
 import { SearchResultService } from "./services/search-result.service";
 import { ColorWord } from "./Pipes/color-word-matched.pipe";
+import { JwPaginationComponent } from 'jw-angular-pagination';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ColorWord } from "./Pipes/color-word-matched.pipe";
       ResearchResultComponent,
       ResearchPage,
       BookPage,
-      ColorWord
+      ColorWord,
+      JwPaginationComponent
   ],
   imports: [
       BrowserModule,

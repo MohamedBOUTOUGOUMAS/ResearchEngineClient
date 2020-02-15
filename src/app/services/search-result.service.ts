@@ -24,7 +24,6 @@ export class SearchResultService {
   }
 
   public getSearchResultBook(fileName: string): Observable<ISearchResult[]>{
-    console.log('fileName', fileName);
     return this.searchResults$.pipe(
         map((searchResults: ISearchResult[]) =>
           searchResults.filter((searchResult: ISearchResult) => searchResult.book.fileName === fileName))
