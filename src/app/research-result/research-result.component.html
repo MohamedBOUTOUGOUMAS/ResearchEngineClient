@@ -1,45 +1,52 @@
-<app-form-research [styles]="'marginTop-20'"></app-form-research>
-<div class="container">
-  <div class="card text-center m-3">
-    <h3 class="card-header">Résultats de la recherche</h3>
-    <div class="card-body" style="text-align: justify">
-      <ul style="list-style-type: none;">
-        <ng-container *ngFor="let searchResult of pageOfItems">
-          <li *ngIf="searchResult.book.title"
-              style="margin-bottom: 10px; padding: 10px; border: 1px solid #e1e1e1">
-            <a class="text-dark"
-               href=""
-               (click)="showDetails === searchResult.book.fileName ?
+<div>
+  <div class="mt-3">
+    <img src="../../assets/Logo_UPMC.png" width="15%" height="10%">
+  </div>
+  <div class="container">
+    <app-form-research></app-form-research>
+    <div class="card text-center m-3">
+      <h3 class="card-header">Résultats de la recherche</h3>
+      <div class="card-body" style="text-align: justify">
+        <ul style="list-style-type: none;">
+          <ng-container *ngFor="let searchResult of pageOfItems">
+            <li *ngIf="searchResult.book.title"
+                style="margin-bottom: 10px; padding: 10px; border: 1px solid #e1e1e1">
+              <a class="text-dark"
+                 href=""
+                 (click)="showDetails === searchResult.book.fileName ?
                   showDetails = null : showDetails = searchResult.book.fileName;
                   $event.preventDefault()">
-              {{searchResult.book.title}}</a>
-            <div class="container"
-                 *ngIf="showDetails === searchResult.book.fileName"
-                 style="margin-top: 10px">
-              <p class="blockquote-footer">Author: {{searchResult.book.author}}</p>
-              <p class="blockquote-footer">Release date: {{searchResult.book.releaseDate}}</p>
-              <a class="text-primary" [routerLink]="['/search/book']"
-                 [queryParams]="{ fileName: searchResult.book.fileName }">
-                Lire le livre</a>
+                {{searchResult.book.title}}</a>
+              <div class="container"
+                   *ngIf="showDetails === searchResult.book.fileName"
+                   style="margin-top: 10px">
+                <p class="blockquote-footer">Author: {{searchResult.book.author}}</p>
+                <p class="blockquote-footer">Release date: {{searchResult.book.releaseDate}}</p>
+                <a class="text-primary" [routerLink]="['/search/book']"
+                   [queryParams]="{ fileName: searchResult.book.fileName }">
+                  Lire le livre</a>
+              </div>
+            </li>
+          </ng-container>
+
+          <div *ngIf="requestStatus === 0"
+               class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
             </div>
-          </li>
-        </ng-container>
-
-        <div *ngIf="requestStatus === 0" class="d-flex justify-content-center">
-          <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
           </div>
-        </div>
 
-        <div *ngIf="(!pageOfItems || pageOfItems.length === 0) && requestStatus === 1" class="card">
-          <div class="card-body">
-            Aucun résultat trouvé pour "{{pattern}}"
+          <div *ngIf="(!pageOfItems || pageOfItems.length === 0) && requestStatus === 1" class="card">
+            <div class="card-body">
+              Aucun résultat trouvé pour "{{pattern}}"
+            </div>
           </div>
-        </div>
-      </ul>
-    </div>
-    <div class="card-footer pb-0 pt-3">
-      <jw-pagination [pageSize]="50" [items]="searchResults" (changePage)="onChangePage($event)"></jw-pagination>
+        </ul>
+      </div>
+      <div class="card-footer pb-0 pt-3">
+        <jw-pagination [pageSize]="50" [items]="searchResults" (changePage)="onChangePage($event)"></jw-pagination>
+      </div>
     </div>
   </div>
+
 </div>

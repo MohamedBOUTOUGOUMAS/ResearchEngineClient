@@ -16,7 +16,7 @@ export class ColorWord implements PipeTransform {
     const searchResult = _.first(searchResults);
     searchResult.positions.forEach(position => {
       let line = book.content[position.nbLine-1];
-      let word = this.getSubString(line, position.initPos, position.endPos);
+      let word = position.word ? position.word : this.getSubString(line, position.initPos, position.endPos);
       book.content[position.nbLine-1] = line.replace(word, `<span class='bg-danger text-white'>${word}</span>`);
     })
     return book;

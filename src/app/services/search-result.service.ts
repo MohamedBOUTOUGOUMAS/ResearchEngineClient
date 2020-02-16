@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IBook, ISearchResult } from "../topics/Interfaces";
 import { Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { map } from "rxjs/operators";
 
 @Injectable({
@@ -15,7 +15,8 @@ export class SearchResultService {
 
   public getSearchResultData(url?: string): Observable<Array<ISearchResult>>{
     if (this.searchResults$ && !url) return this.searchResults$;
-    this.searchResults$ = this.http.get<Array<ISearchResult>>(url);
+    const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
+    this.searchResults$ = this.http.get<Array<ISearchResult>>(url, {headers});
     return this.searchResults$;
   }
 

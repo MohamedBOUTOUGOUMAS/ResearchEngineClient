@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ISearchResult } from '../topics/Interfaces';
 import { SearchResultService } from "../services/search-result.service";
+import {stringify} from "querystring";
 
 @Component({
   selector: 'app-research-result',
@@ -33,7 +34,7 @@ export class ResearchResultComponent implements OnInit {
     this.pageOfItems = [];
     this.activatedRoute.queryParams.pipe().subscribe(param => {
       if (param.pattern) {
-        this.pattern = param.pattern;
+        this.pattern = stringify(param.pattern);
         this.initData();
         this.searchResultService.getSearchResultData(`http://localhost:8080/search?pattern=${param.pattern}`)
           .pipe()
