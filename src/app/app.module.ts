@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BookPage } from "./book-page/book-page.component";
 import { SearchResultService } from "./services/search-result.service";
-import { ColorWord } from "./Pipes/color-word-matched.pipe";
+import { ColorWord } from "./pipes/color-word-matched.pipe";
 import { JwPaginationComponent } from 'jw-angular-pagination';
 
 @NgModule({

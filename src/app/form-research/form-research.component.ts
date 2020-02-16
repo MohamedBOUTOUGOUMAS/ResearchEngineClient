@@ -8,4 +8,6 @@ import { Component, Input } from '@angular/core';
 export class FormResearchComponent {
   @Input() styles: string;
   public pattern: string;
+  public advencedSearch = false;
+  public advencedInput: string;
 }

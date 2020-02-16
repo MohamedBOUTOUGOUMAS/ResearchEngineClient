@@ -1,8 +1,10 @@
-<div class="container"
-     [ngClass]="styles">
-  <form>
+<div class="container p-5"
+     [ngClass]="styles"
+     style="border: 1px solid #e1e1e1">
+  <form class="mb-3">
     <div class="input-group">
-      <input [(ngModel)] = "pattern"
+      <input [(ngModel)]="pattern"
+             (focus)="advencedSearch = false"
              type="text"
              class="form-control"
              name="recherche"
@@ -16,4 +18,28 @@
       </div>
     </div>
   </form>
+
+  <a class="blockquote-footer" href="" (click)="$event.preventDefault();
+                    advencedSearch = !advencedSearch">Recherche avancée
+    <i class="fa" [ngClass]="{'fa-minus': advencedSearch, 'fa-plus': !advencedSearch}"></i>
+  </a>
+
+  <div class="d-flex justify-content-center">
+    <form style="width: 60%">
+      <div *ngIf="advencedSearch"
+           class="input-group mt-3">
+        <input [(ngModel)]="advencedInput"
+               class="form-control"
+               name="rechercheAvancee"
+               placeholder="Entrez une expression reguliere">
+        <div class="input-group-append">
+          <button type="submit"
+                  class="btn btn-outline-secondary"
+                  [routerLink]="['/search']" [queryParams]="{ pattern: advencedInput, advenced: true }">
+            Rechercher
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

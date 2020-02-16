@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { combineLatest, Observable } from "rxjs";
+import {combineLatest, forkJoin, Observable} from "rxjs";
 import { SearchResultService } from "../services/search-result.service";
 import { IBook, ISearchResult } from "../topics/Interfaces";
-import { ColorWord } from "../Pipes/color-word-matched.pipe";
+import { ColorWord } from "../pipes/color-word-matched.pipe";
 
 
 @Component({
@@ -25,8 +25,8 @@ export class BookPage implements OnInit{
         this.activatedRoute.queryParams .pipe().subscribe(param => {
             if (param.fileName) {
                 this.book$ = this.searchResultService.getBook(`http://localhost:8080/search/book?fileName=${param.fileName}`);
-                this.searchResults$ = this.searchResultService.getSearchResultBook(param.fileName);
-                combineLatest(this.book$, this.searchResults$).subscribe(([book, searchResults]) => {
+                this.searchResults$ = this.searchResultService.getSearchResultBook$(param.fileName);
+                forkJoin(this.book$, this.searchResults$).subscribe(([book, searchResults]) => {
                     this.book = this.colorWord.transform(book, searchResults);
                 });
             }

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { ISearchResult } from '../topics/Interfaces';
 import { SearchResultService } from "../services/search-result.service";
-import {stringify} from "querystring";
 
 @Component({
   selector: 'app-research-result',
@@ -16,7 +14,7 @@ export class ResearchResultComponent implements OnInit {
   public showDetails: string;
   public pageOfItems: Array<ISearchResult>;
   public pattern: string;
-  public requestStatus = 0;
+  public requestStatus;
   public constructor(private activatedRoute: ActivatedRoute, private searchResultService: SearchResultService) {
   }
 
@@ -32,11 +30,20 @@ export class ResearchResultComponent implements OnInit {
 
   public ngOnInit(): void {
     this.pageOfItems = [];
+
     this.activatedRoute.queryParams.pipe().subscribe(param => {
-      if (param.pattern) {
-        this.pattern = stringify(param.pattern);
-        this.initData();
-        this.searchResultService.getSearchResultData(`http://localhost:8080/search?pattern=${param.pattern}`)
+      this.initData();
+      if (param.pattern && !param.advenced) {
+        this.pattern = param.pattern;
+        this.searchResultService.getSearchResults$(`http://localhost:8080/search?pattern=${param.pattern}`)
+          .pipe()
+          .subscribe(searchResults => {
+            this.requestStatus = 1;
+            this.searchResults = searchResults;
+          });
+      } else if(param.advenced) {
+        this.pattern = param.pattern;
+        this.searchResultService.getAdvencedSearchResults$(`http://localhost:8080/advencedSearch`, {regEx: param.pattern})
           .pipe()
           .subscribe(searchResults => {
             this.requestStatus = 1;
