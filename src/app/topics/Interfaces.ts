@@ -6,15 +6,7 @@ export interface IBook {
     content: string[];
 }
 
-export interface IPosition {
-    line: string;
-    nbLine: number;
-    initPos: number;
-    endPos: number;
-    word: string;
-}
-
 export interface ISearchResult extends IBook {
     book: IBook;
-    positions: Array<IPosition>;
+    nbMatched: number;
 }
