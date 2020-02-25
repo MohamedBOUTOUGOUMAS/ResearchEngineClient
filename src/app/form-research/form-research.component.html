@@ -1,49 +1,64 @@
 <div class="container p-5"
      [ngClass]="styles"
      style="border: 1px solid #e1e1e1; border-radius: 5px">
-  <form class="mb-3">
-    <div class="input-group">
-      <input [(ngModel)]="pattern"
-             (focus)="advencedSearch = false"
-             type="text"
-             class="form-control"
-             name="recherche"
-             placeholder="recherche ..."
-             style="border-radius: 0px">
-      <div class="input-group-append">
-        <button type="submit"
-                class="btn btn-outline-secondary"
-                style="border-radius: 0px"
-                [routerLink]="['/search']" [queryParams]="{ pattern: pattern }">
-          Rechercher
-        </button>
+  <div class="row">
+    <a class="col-sm-1" href="#"
+       (click)="fast = !fast; $event.preventDefault()">
+      <img placement="bottom"
+           triggers="hover"
+           ngbPopover="Activez le mode Turbo"
+           style="border-radius: 20px" *ngIf="!fast" src="../../assets/navette.jpeg" width="40px" height="40px">
+      <img placement="bottom"
+           triggers="hover"
+           ngbPopover="Désactivez le mode Turbo"
+           style="border-radius: 20px" *ngIf="fast" src="../../assets/navetteGo.jpg" width="40px" height="40px">
+    </a>
+    <div class="col-sm-11">
+      <form class="mb-3">
+        <div class="input-group">
+          <input [(ngModel)]="pattern"
+                 (focus)="advencedSearch = false"
+                 type="text"
+                 class="form-control"
+                 name="recherche"
+                 placeholder="recherche ..."
+                 style="border-radius: 0px">
+          <div class="input-group-append">
+            <button type="submit"
+                    class="btn btn-outline-secondary"
+                    style="border-radius: 0px"
+                    [routerLink]="['/search']" [queryParams]="{ pattern: pattern, fast: fast }">
+              Rechercher
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <a class="blockquote-footer" href="" (click)="$event.preventDefault();
+                    advencedSearch = !advencedSearch">Recherche avancée
+        <i class="fa" [ngClass]="{'fa-minus': advencedSearch, 'fa-plus': !advencedSearch}"></i>
+      </a>
+
+      <div class="d-flex justify-content-center">
+        <form style="width: 70%">
+          <div *ngIf="advencedSearch"
+               class="input-group mt-3">
+            <input [(ngModel)]="advencedInput"
+                   class="form-control"
+                   style="border-radius: 0px"
+                   name="rechercheAvancee"
+                   placeholder="Entrez une expression reguliere">
+            <div class="input-group-append">
+              <button type="submit"
+                      class="btn btn-outline-secondary"
+                      style="border-radius: 0px"
+                      [routerLink]="['/search']" [queryParams]="{ pattern: advencedInput, advenced: true, fast: fast }">
+                Rechercher
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-  </form>
-
-  <a class="blockquote-footer" href="" (click)="$event.preventDefault();
-                    advencedSearch = !advencedSearch">Recherche avancée
-    <i class="fa" [ngClass]="{'fa-minus': advencedSearch, 'fa-plus': !advencedSearch}"></i>
-  </a>
-
-  <div class="d-flex justify-content-center">
-    <form style="width: 70%">
-      <div *ngIf="advencedSearch"
-           class="input-group mt-3">
-        <input [(ngModel)]="advencedInput"
-               class="form-control"
-               style="border-radius: 0px"
-               name="rechercheAvancee"
-               placeholder="Entrez une expression reguliere">
-        <div class="input-group-append">
-          <button type="submit"
-                  class="btn btn-outline-secondary"
-                  style="border-radius: 0px"
-                  [routerLink]="['/search']" [queryParams]="{ pattern: advencedInput, advenced: true }">
-            Rechercher
-          </button>
-        </div>
-      </div>
-    </form>
   </div>
 </div>

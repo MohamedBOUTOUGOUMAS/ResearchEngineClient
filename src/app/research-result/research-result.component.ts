@@ -35,7 +35,7 @@ export class ResearchResultComponent implements OnInit {
       this.initData();
       if (param.pattern && !param.advenced) {
         this.pattern = param.pattern;
-        this.searchResultService.getSearchResults$(`http://localhost:8080/search?pattern=${param.pattern}`)
+        this.searchResultService.getSearchResults$(`http://localhost:8080/search?pattern=${param.pattern}&fast=${param.fast}`)
           .pipe()
           .subscribe(searchResults => {
             this.requestStatus = 1;
@@ -43,7 +43,11 @@ export class ResearchResultComponent implements OnInit {
           });
       } else if(param.advenced) {
         this.pattern = param.pattern;
-        this.searchResultService.getAdvencedSearchResults$(`http://localhost:8080/advencedSearch`, {regEx: param.pattern})
+        this.searchResultService.getAdvencedSearchResults$(`http://localhost:8080/advencedSearch`,
+          {
+            regEx: param.pattern,
+            fast: param.fast
+          })
           .pipe()
           .subscribe(searchResults => {
             this.requestStatus = 1;

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
@@ -33,6 +34,7 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
       ]),
       HttpClientModule,
       FormsModule,
+      NgbModule,
   ],
   providers: [SearchResultService, ColorWord],
   bootstrap: [AppComponent]
