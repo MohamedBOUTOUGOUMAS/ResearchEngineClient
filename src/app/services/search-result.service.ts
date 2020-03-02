@@ -13,8 +13,8 @@ export class SearchResultService {
   constructor(private http: HttpClient) {}
 
   public getSearchResults$(url?: string): Observable<Array<ISearchResult>> {
-    if (this.searchResults$ && !url) return this.searchResults$;
-    const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
+    if (this.searchResults$ && !url) { return this.searchResults$; }
+    const headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
     this.searchResults$ = this.http.get<Array<ISearchResult>>(url, {headers});
     return this.searchResults$;
   }
@@ -31,7 +31,7 @@ export class SearchResultService {
   }
 
   public getAdvencedSearchResults$(url: string, payload: any): Observable<Array<ISearchResult>> {
-    if (this.searchResults$ && !url) return this.searchResults$;
+    if (this.searchResults$ && !url) { return this.searchResults$; }
     this.searchResults$ = this.http.post<Array<ISearchResult>>(url, payload);
     return this.searchResults$;
   }

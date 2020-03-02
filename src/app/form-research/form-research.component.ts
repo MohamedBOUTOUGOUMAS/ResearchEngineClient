@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { URI, URI_LOCAL } from '../topics/Interfaces';
 
 @Component({
   selector: 'app-form-research',
@@ -24,6 +25,8 @@ export class FormResearchComponent implements OnInit {
     this.activatedRoute.queryParams.pipe().subscribe(param => {
       if (param.fast) {this.fast = param.fast === 'true'; }
     });
-    this.options$ = this.http.get<string[]>('http://localhost:8080/autoComplete');
+    //this.options$ = this.http.get<string[]>(`${URI_LOCAL}autoComplete`);
+    this.options$ = this.http.get<string[]>(`${URI}autoComplete`);
+
   }
 }

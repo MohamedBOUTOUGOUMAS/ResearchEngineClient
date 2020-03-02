@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ISearchResult } from '../topics/Interfaces';
-import { SearchResultService } from "../services/search-result.service";
+import { SearchResultService } from '../services/search-result.service';
+import { URI, URI_LOCAL } from '../topics/Interfaces';
+
 
 @Component({
   selector: 'app-research-result',
   templateUrl: './research-result.component.html',
-  styles:['']
+  styles: ['']
 })
 export class ResearchResultComponent implements OnInit {
 
@@ -22,7 +24,7 @@ export class ResearchResultComponent implements OnInit {
     this.pageOfItems = pageOfItems;
   }
 
-  public initData(){
+  public initData() {
     this.searchResults = [];
     this.requestStatus = 0;
     this.pageOfItems = [];
@@ -35,15 +37,17 @@ export class ResearchResultComponent implements OnInit {
       this.initData();
       if (param.pattern && !param.advenced) {
         this.pattern = param.pattern;
-        this.searchResultService.getSearchResults$(`http://localhost:8080/search?pattern=${param.pattern}&fast=${param.fast}`)
+        //this.searchResultService.getSearchResults$(`${URI_LOCAL}search?pattern=${param.pattern}&fast=${param.fast}`)
+        this.searchResultService.getSearchResults$(`${URI}search?pattern=${param.pattern}&fast=${param.fast}`)
           .pipe()
           .subscribe(searchResults => {
             this.requestStatus = 1;
             this.searchResults = searchResults;
           });
-      } else if(param.advenced) {
+      } else if (param.advenced) {
         this.pattern = param.pattern;
-        this.searchResultService.getAdvencedSearchResults$(`http://localhost:8080/advencedSearch`,
+        //this.searchResultService.getAdvencedSearchResults$(`${URI_LOCAL}advencedSearch`,
+        this.searchResultService.getAdvencedSearchResults$(`${URI}advencedSearch`,
           {
             regEx: param.pattern,
             fast: param.fast

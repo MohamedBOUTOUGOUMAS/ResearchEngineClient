@@ -20,8 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BookPage } from './book-page/book-page.component';
 import { SearchResultService } from './services/search-result.service';
 import { ColorWord } from './pipes/color-word-matched.pipe';
-import { JwPaginationComponent } from 'jw-angular-pagination';
 import { SearchFilter } from './pipes/search-filtering.pipe';
+import { JwPaginationComponent } from './jw-pagination-custom/jw-pagination.component';
 
 @NgModule({
   declarations: [

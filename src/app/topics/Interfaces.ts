@@ -10,3 +10,6 @@ export interface ISearchResult extends IBook {
     book: IBook;
     nbMatched: number;
 }
+
+export const URI = 'https://research-engine.herokuapp.com/';
+export const URI_LOCAL = 'http://localhost:8080/';
