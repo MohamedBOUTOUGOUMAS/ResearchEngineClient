@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { IBook, ISearchResult } from "../topics/Interfaces";
-import { Observable } from "rxjs";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import { map } from "rxjs/operators";
+import { IBook, ISearchResult } from '../topics/Interfaces';
+import { Observable } from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',

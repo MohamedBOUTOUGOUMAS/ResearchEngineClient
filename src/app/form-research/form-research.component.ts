@@ -1,25 +1,29 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-form-research',
   templateUrl: './form-research.component.html',
   styleUrls: ['./form-research.component.scss']
 })
-export class FormResearchComponent implements OnInit{
+export class FormResearchComponent implements OnInit {
   @Input() styles: string;
   public pattern: string;
   public advencedSearch = false;
   public advencedInput: string;
   public fast = false;
+  public options$: Observable<string[]>;
+  public myControl = new FormControl();
 
-  constructor(private activatedRoute : ActivatedRoute) {}
+  constructor(private activatedRoute: ActivatedRoute, private http: HttpClient) {}
 
   public ngOnInit(): void {
     this.activatedRoute.queryParams.pipe().subscribe(param => {
-      if (param.fast) this.fast = param.fast === "true";
-      console.log('this.fast', this.fast);
+      if (param.fast) {this.fast = param.fast === 'true'; }
     });
+    this.options$ = this.http.get<string[]>('http://localhost:8080/autoComplete');
   }
-
 }

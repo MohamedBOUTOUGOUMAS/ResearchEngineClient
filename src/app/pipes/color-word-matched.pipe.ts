@@ -1,13 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IBook, ISearchResult } from "../topics/Interfaces";
+import { IBook, ISearchResult } from '../topics/Interfaces';
 import _ from 'lodash';
 @Pipe({
   name: 'colorWord',
 })
 export class ColorWord implements PipeTransform {
   private getSubString(line: string, from: number, to: number): string{
-    let str = "";
-    for(let i = from; i < to; i++){
+    let str = '';
+    for (let i = from; i < to; i++){
       str += line.charAt(i);
     }
     return str;
