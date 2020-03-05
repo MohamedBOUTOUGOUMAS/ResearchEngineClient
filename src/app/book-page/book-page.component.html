@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-3"></div>
     <div class="col-lg-6 mt-5">
-        <p *ngFor="let line of (book$ | async)?.content"
+        <p *ngFor="let line of book?.content"
            style="text-align: justify"
            [innerHTML]="line">
         </p>

@@ -50,14 +50,14 @@
           <div *ngIf="advencedSearch"
                class="input-group mt-3">
                   <input [(ngModel)]="advencedInput"
-                          [matAutocomplete]="auto"
+                          [matAutocomplete]="auto2"
                           [formControl] = "myControl"
                           matInput
                           class="form-control"
                           style="border-radius: 0px"
                           name="rechercheAvancee"
                           placeholder="Entrez une expression reguliere">
-                  <mat-autocomplete #auto="matAutocomplete">
+                  <mat-autocomplete #auto2="matAutocomplete">
                     <mat-option *ngFor="let option of (options$ | async |searchFilter:advencedInput)" [value]="option">{{option}}</mat-option>
                   </mat-autocomplete>
                   <div class="input-group-append">

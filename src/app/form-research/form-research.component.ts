@@ -27,6 +27,5 @@ export class FormResearchComponent implements OnInit {
     });
     //this.options$ = this.http.get<string[]>(`${URI_LOCAL}autoComplete`);
     this.options$ = this.http.get<string[]>(`${URI}autoComplete`);
-
   }
 }

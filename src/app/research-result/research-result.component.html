@@ -30,7 +30,7 @@
                   <p class="blockquote-footer">Release date: {{searchResult.book.releaseDate}}</p>
                   <a class="text-primary"
                      [routerLink]="['/search/book']"
-                     [queryParams]="{ fileName: searchResult.book.fileName }">
+                     [queryParams]="{ fileName: searchResult.book.fileName, pattern: pattern}">
                     Lire le livre</a>
                 </div>
               </li>
