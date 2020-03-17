@@ -2,44 +2,52 @@
      [ngClass]="styles"
      style="border: 1px solid #e1e1e1; border-radius: 5px">
     <div class="row" style="margin-bottom: 20px; display: flex; justify-content: center;">
-        <mat-card>
-            <mat-card-content>
-                <h2 style="text-align: center; margin-bottom: 40px">
-                    Configuration de la recherche</h2>
+        <ng-template #popContent>
+            <mat-card>
+                <mat-card-content>
+                    <section style="font-size: 10px">
+                        <h5 style="margin-bottom: 10px">Le mode de recherche</h5>
+                        <mat-radio-group [(ngModel)]="fast">
+                            <mat-radio-button style="margin-right: 5px" value="false">Basique</mat-radio-button>
+                            <mat-radio-button style="margin-right: 5px" value="true">Rapide</mat-radio-button>
+                        </mat-radio-group>
+                    </section>
 
-                <section style="font-size: 10px">
-                    <h5 style="margin-bottom: 10px">L'endroit de la recherche</h5>
-                    <mat-radio-group [(ngModel)]="searchSource">
-                        <mat-radio-button style="margin-right: 5px" value="db">Base de données</mat-radio-button>
-                        <mat-radio-button style="margin-right: 5px" value="index">Index</mat-radio-button>
-                    </mat-radio-group>
-                </section>
-                <section style="margin-top: 20px; font-size: 10px">
-                    <h5 style="margin-bottom: 10px">Stratégie de classification des résultats</h5>
-                    <mat-radio-group [(ngModel)]="classification">
-                        <mat-radio-button style="display: block" value="btw">Betweeness</mat-radio-button>
-                        <mat-radio-button style="display: block" value="pgr">Page-rank</mat-radio-button>
-                        <mat-radio-button style="display: block" value="nbOccurs">Nombre de mots trouvés</mat-radio-button>
-                        <mat-radio-button style="display: block" value="nbClick">Livre le plus consulté</mat-radio-button>
-                    </mat-radio-group>
-                </section>
+                    <section style="font-size: 10px; margin-top: 20px">
+                        <h5 style="margin-bottom: 10px">Source</h5>
+                        <mat-radio-group [(ngModel)]="searchSource" [disabled]="fast === 'false'">
+                            <mat-radio-button style="margin-right: 5px" value="db">Base de données</mat-radio-button>
+                            <mat-radio-button style="margin-right: 5px" value="index">Index</mat-radio-button>
+                        </mat-radio-group>
+                    </section>
+                    <section style="margin-top: 20px; font-size: 10px">
+                        <h5 style="margin-bottom: 10px">Classification</h5>
+                        <mat-radio-group [(ngModel)]="classification">
+                            <mat-radio-button style="display: block" value="btw">Betweeness</mat-radio-button>
+                            <mat-radio-button style="display: block" value="pgr">Page-rank</mat-radio-button>
+                            <mat-radio-button style="display: block" value="nbOccurs">Nombre de mots trouvés</mat-radio-button>
+                            <mat-radio-button style="display: block" value="nbClick">Livre le plus consulté</mat-radio-button>
+                        </mat-radio-group>
+                    </section>
                 </mat-card-content>
-        </mat-card>
+            </mat-card>
+
+        </ng-template>
+        <ng-template #popTitle>
+            <h4 style="text-align: center;">
+                Configuration de la recherche</h4>
+        </ng-template>
+        <button type="button" class="btn btn-outline-secondary"
+                [ngbPopover]="popContent"
+                [popoverTitle]="popTitle"
+                [autoClose]="'outside'"
+                [container]="'body'">
+            <i class="fa fa-cog"></i>
+        </button>
 
     </div>
     <div class="row">
-        <a class="col-sm-1" href="#"
-           (click)="fast = !fast; $event.preventDefault()">
-            <img placement="bottom"
-                 triggers="hover"
-                 ngbPopover="Activez le mode Turbo"
-                 style="border-radius: 20px" *ngIf="!fast" src="../../assets/navette.jpeg" width="40px" height="40px">
-            <img placement="bottom"
-                 triggers="hover"
-                 ngbPopover="Désactivez le mode Turbo"
-                 style="border-radius: 20px" *ngIf="fast" src="../../assets/navetteGo.jpg" width="40px" height="40px">
-        </a>
-        <div class="col-sm-11">
+        <div style="width: 100%">
             <form class="mb-3">
                 <div class="input-group">
                     <input [(ngModel)]="pattern"
@@ -73,7 +81,7 @@
             </a>
 
             <div class="d-flex justify-content-center">
-                <form style="width: 70%">
+                <form>
                     <div *ngIf="advencedSearch"
                          class="input-group mt-3">
                         <input [(ngModel)]="advencedInput"

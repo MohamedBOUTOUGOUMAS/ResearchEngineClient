@@ -15,7 +15,7 @@ export class FormResearchComponent implements OnInit {
   public pattern: string;
   public advencedSearch = false;
   public advencedInput: string;
-  public fast = false;
+  public fast = 'false';
   public options$: Observable<string[]>;
   public myControl = new FormControl();
   public searchSource = 'index';
@@ -25,7 +25,7 @@ export class FormResearchComponent implements OnInit {
 
   public ngOnInit(): void {
     this.activatedRoute.queryParams.pipe().subscribe(param => {
-      if (param.fast) {this.fast = param.fast === 'true'; }
+      if (param.fast) {this.fast = param.fast === 'true' ? 'true' : 'false'; }
     });
     //this.options$ = this.http.get<string[]>(`${URI_LOCAL}autoComplete`);
     this.options$ = this.http.get<string[]>(`${URI}autoComplete`);

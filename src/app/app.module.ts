@@ -9,6 +9,7 @@ import {
     MatInputModule, MatRadioModule
 } from '@angular/material';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import {NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
 
 
 import {AppComponent} from './app.component';
@@ -54,6 +55,7 @@ import {JwPaginationComponent} from './jw-pagination-custom/jw-pagination.compon
     ],
     providers: [SearchResultService, ColorWord, SearchFilter,
         { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+        NgbPopoverConfig
     ],
     bootstrap: [AppComponent]
 })
