@@ -36,4 +36,8 @@ export class SearchResultService {
     return this.searchResults$;
   }
 
+  public getSuggestions$(url: string): Observable<Array<ISearchResult>> {
+    return this.http.get<Array<ISearchResult>>(url);
+  }
+
 }

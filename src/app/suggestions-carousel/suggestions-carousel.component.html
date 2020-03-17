@@ -1,0 +1,16 @@
+<ngb-carousel>
+    <ng-container *ngFor="let sugg of suggestions; let i = index">
+        <ng-template ngbSlide>
+            <div class="picsum-img-wrapper">
+                <img src="../../assets/fond-gris-clair.jpg" width="100%" height="30%"
+                     style="border-radius: 5px" alt="Random first slide">
+            </div>
+            <div class="carousel-caption">
+                <h3><a class="text-primary" style="text-decoration: none; color: inherit"
+                       [routerLink]="['/search/book']"
+                       [queryParams]="{ fileName: sugg.book.fileName, pattern: pattern}">
+                    {{getTitle(i)}}</a></h3>
+            </div>
+        </ng-template>
+    </ng-container>
+</ngb-carousel>

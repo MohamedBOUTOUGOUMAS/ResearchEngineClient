@@ -24,6 +24,8 @@ import {SearchResultService} from './services/search-result.service';
 import {ColorWord} from './pipes/color-word-matched.pipe';
 import {SearchFilter} from './pipes/search-filtering.pipe';
 import {JwPaginationComponent} from './jw-pagination-custom/jw-pagination.component';
+import { SuggestionsComponent } from './suggestions/suggestions.component';
+import { SuggestionsCarouselComponent } from './suggestions-carousel/suggestions-carousel.component';
 
 @NgModule({
     declarations: [
@@ -35,6 +37,8 @@ import {JwPaginationComponent} from './jw-pagination-custom/jw-pagination.compon
         ColorWord,
         JwPaginationComponent,
         SearchFilter,
+        SuggestionsComponent,
+        SuggestionsCarouselComponent,
     ],
     imports: [
         BrowserModule,

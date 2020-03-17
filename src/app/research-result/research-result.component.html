@@ -32,6 +32,7 @@
                      [routerLink]="['/search/book']"
                      [queryParams]="{ fileName: searchResult.book.fileName, pattern: pattern}">
                     Lire le livre</a>
+                  <app-suggestions [fileName]="searchResult.book.fileName" [pattern]="pattern" ></app-suggestions>
                 </div>
               </li>
             </ng-container>
