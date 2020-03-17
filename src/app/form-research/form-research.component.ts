@@ -18,6 +18,8 @@ export class FormResearchComponent implements OnInit {
   public fast = false;
   public options$: Observable<string[]>;
   public myControl = new FormControl();
+  public searchSource = 'index';
+  public classification = 'nbOccurs';
 
   constructor(private activatedRoute: ActivatedRoute, private http: HttpClient) {}
 

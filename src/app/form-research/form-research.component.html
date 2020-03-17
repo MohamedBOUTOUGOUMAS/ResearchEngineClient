@@ -1,76 +1,105 @@
 <div class="container p-5"
      [ngClass]="styles"
      style="border: 1px solid #e1e1e1; border-radius: 5px">
-  <div class="row">
-    <a class="col-sm-1" href="#"
-       (click)="fast = !fast; $event.preventDefault()">
-      <img placement="bottom"
-           triggers="hover"
-           ngbPopover="Activez le mode Turbo"
-           style="border-radius: 20px" *ngIf="!fast" src="../../assets/navette.jpeg" width="40px" height="40px">
-      <img placement="bottom"
-           triggers="hover"
-           ngbPopover="Désactivez le mode Turbo"
-           style="border-radius: 20px" *ngIf="fast" src="../../assets/navetteGo.jpg" width="40px" height="40px">
-    </a>
-    <div class="col-sm-11">
-      <form class="mb-3">
-        <div class="input-group">
-            <input [(ngModel)]="pattern"
-                  [matAutocomplete]="auto"
-                  [formControl] = "myControl"
-                  matInput
-                  (focus)="advencedSearch = false"
-                  type="text"
-                  class="form-control"
-                  name="recherche"
-                  placeholder="recherche ..."
-                  style="border-radius: 0px">
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let option of (options$ | async | searchFilter:pattern)" [value]="option">{{option}}</mat-option>
-            </mat-autocomplete>
-            <div class="input-group-append">
-              <button type="submit"
-                      class="btn btn-outline-secondary"
-                      style="border-radius: 0px"
-                      [routerLink]="['/search']" [queryParams]="{ pattern: pattern, fast: fast }">
-                Rechercher
-              </button>
+    <div class="row" style="margin-bottom: 20px; display: flex; justify-content: center;">
+        <mat-card>
+            <mat-card-content>
+                <h2 style="text-align: center; margin-bottom: 40px">
+                    Configuration de la recherche</h2>
+
+                <section style="font-size: 10px">
+                    <h5 style="margin-bottom: 10px">L'endroit de la recherche</h5>
+                    <mat-radio-group [(ngModel)]="searchSource">
+                        <mat-radio-button style="margin-right: 5px" value="db">Base de données</mat-radio-button>
+                        <mat-radio-button style="margin-right: 5px" value="index">Index</mat-radio-button>
+                    </mat-radio-group>
+                </section>
+                <section style="margin-top: 20px; font-size: 10px">
+                    <h5 style="margin-bottom: 10px">Stratégie de classification des résultats</h5>
+                    <mat-radio-group [(ngModel)]="classification">
+                        <mat-radio-button style="display: block" value="btw">Betweeness</mat-radio-button>
+                        <mat-radio-button style="display: block" value="pgr">Page-rank</mat-radio-button>
+                        <mat-radio-button style="display: block" value="nbOccurs">Nombre de mots trouvés</mat-radio-button>
+                        <mat-radio-button style="display: block" value="nbClick">Livre le plus consulté</mat-radio-button>
+                    </mat-radio-group>
+                </section>
+                </mat-card-content>
+        </mat-card>
+
+    </div>
+    <div class="row">
+        <a class="col-sm-1" href="#"
+           (click)="fast = !fast; $event.preventDefault()">
+            <img placement="bottom"
+                 triggers="hover"
+                 ngbPopover="Activez le mode Turbo"
+                 style="border-radius: 20px" *ngIf="!fast" src="../../assets/navette.jpeg" width="40px" height="40px">
+            <img placement="bottom"
+                 triggers="hover"
+                 ngbPopover="Désactivez le mode Turbo"
+                 style="border-radius: 20px" *ngIf="fast" src="../../assets/navetteGo.jpg" width="40px" height="40px">
+        </a>
+        <div class="col-sm-11">
+            <form class="mb-3">
+                <div class="input-group">
+                    <input [(ngModel)]="pattern"
+                           [matAutocomplete]="auto"
+                           [formControl]="myControl"
+                           matInput
+                           (focus)="advencedSearch = false"
+                           type="text"
+                           class="form-control"
+                           name="recherche"
+                           placeholder="recherche ..."
+                           style="border-radius: 0px">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of (options$ | async | searchFilter:pattern)"
+                                    [value]="option">{{option}}</mat-option>
+                    </mat-autocomplete>
+                    <div class="input-group-append">
+                        <button type="submit"
+                                class="btn btn-outline-secondary"
+                                style="border-radius: 0px"
+                                [routerLink]="['/search']" [queryParams]="{ pattern: pattern, fast: fast, searchSource: searchSource, classification: classification }">
+                            Rechercher
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <a class="blockquote-footer" href="" (click)="$event.preventDefault();
+                    advencedSearch = !advencedSearch">Recherche avancée
+                <i class="fa" [ngClass]="{'fa-minus': advencedSearch, 'fa-plus': !advencedSearch}"></i>
+            </a>
+
+            <div class="d-flex justify-content-center">
+                <form style="width: 70%">
+                    <div *ngIf="advencedSearch"
+                         class="input-group mt-3">
+                        <input [(ngModel)]="advencedInput"
+                               [matAutocomplete]="auto2"
+                               [formControl]="myControl"
+                               matInput
+                               class="form-control"
+                               style="border-radius: 0px"
+                               name="rechercheAvancee"
+                               placeholder="Entrez une expression reguliere">
+                        <mat-autocomplete #auto2="matAutocomplete">
+                            <mat-option *ngFor="let option of (options$ | async |searchFilter:advencedInput)"
+                                        [value]="option">{{option}}</mat-option>
+                        </mat-autocomplete>
+                        <div class="input-group-append">
+                            <button type="submit"
+                                    class="btn btn-outline-secondary"
+                                    style="border-radius: 0px"
+                                    [routerLink]="['/search']"
+                                    [queryParams]="{ pattern: advencedInput, advenced: true, fast: fast, searchSource: searchSource, classification: classification }">
+                                Rechercher
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-      </form>
-
-      <a class="blockquote-footer" href="" (click)="$event.preventDefault();
-                    advencedSearch = !advencedSearch">Recherche avancée
-        <i class="fa" [ngClass]="{'fa-minus': advencedSearch, 'fa-plus': !advencedSearch}"></i>
-      </a>
-
-      <div class="d-flex justify-content-center">
-        <form style="width: 70%">
-          <div *ngIf="advencedSearch"
-               class="input-group mt-3">
-                  <input [(ngModel)]="advencedInput"
-                          [matAutocomplete]="auto2"
-                          [formControl] = "myControl"
-                          matInput
-                          class="form-control"
-                          style="border-radius: 0px"
-                          name="rechercheAvancee"
-                          placeholder="Entrez une expression reguliere">
-                  <mat-autocomplete #auto2="matAutocomplete">
-                    <mat-option *ngFor="let option of (options$ | async |searchFilter:advencedInput)" [value]="option">{{option}}</mat-option>
-                  </mat-autocomplete>
-                  <div class="input-group-append">
-                    <button type="submit"
-                            class="btn btn-outline-secondary"
-                            style="border-radius: 0px"
-                            [routerLink]="['/search']" [queryParams]="{ pattern: advencedInput, advenced: true, fast: fast }">
-                      Rechercher
-                    </button>
-                  </div>
-          </div>
-        </form>
-      </div>
     </div>
-  </div>
 </div>
