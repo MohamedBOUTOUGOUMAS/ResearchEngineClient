@@ -7,7 +7,7 @@ import { URI, URI_LOCAL } from '../topics/Interfaces';
 @Component({
   selector: 'app-suggestions',
   templateUrl: './suggestions.component.html',
-  styleUrls: ['./suggestions.component.css']
+  styleUrls: []
 })
 export class SuggestionsComponent implements OnInit {
   public suggestions: Array<ISearchResult> = [];
@@ -16,8 +16,8 @@ export class SuggestionsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private searchResultService: SearchResultService) { }
 
   ngOnInit(): void {
-    this.searchResultService.getSuggestions$(`${URI}suggestions?${this.fileName}`)
-    //this.searchResultService.getSuggestions$(`${URI_LOCAL}suggestions?filename=${this.fileName}`)
+    //this.searchResultService.getSuggestions$(`${URI}suggestions?${this.fileName}`)
+    this.searchResultService.getSuggestions$(`${URI_LOCAL}suggestions?filename=${this.fileName}`)
         .pipe()
         .subscribe(suggestions => {
           this.suggestions = suggestions;

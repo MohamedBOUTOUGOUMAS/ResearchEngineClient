@@ -4,7 +4,7 @@ import {ISearchResult} from '../topics/Interfaces';
 @Component({
   selector: 'app-suggestions-carousel',
   templateUrl: './suggestions-carousel.component.html',
-  styleUrls: ['./suggestions-carousel.component.css']
+  styleUrls: []
 })
 export class SuggestionsCarouselComponent {
   @Input() suggestions: Array<ISearchResult>;
