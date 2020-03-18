@@ -37,8 +37,8 @@ export class ResearchResultComponent implements OnInit {
       this.initData();
       if (param.pattern && !param.advenced) {
         this.pattern = param.pattern;
-        this.searchResultService.getSearchResults$(`${URI_LOCAL}search?pattern=${param.pattern}&fast=${param.fast}&searchSource=${param.searchSource}&classification=${param.classification}`)
-        //this.searchResultService.getSearchResults$(`${URI}search?pattern=${param.pattern}&fast=${param.fast}&searchSource=${param.searchSource}&classification=${param.classification}`)
+        //this.searchResultService.getSearchResults$(`${URI_LOCAL}search?pattern=${param.pattern}&fast=${param.fast}&searchSource=${param.searchSource}&classification=${param.classification}`)
+        this.searchResultService.getSearchResults$(`${URI}search?pattern=${param.pattern}&fast=${param.fast}&searchSource=${param.searchSource}&classification=${param.classification}`)
           .pipe()
           .subscribe(searchResults => {
             this.requestStatus = 1;
@@ -46,8 +46,8 @@ export class ResearchResultComponent implements OnInit {
           });
       } else if (param.advenced) {
         this.pattern = param.pattern;
-        this.searchResultService.getAdvencedSearchResults$(`${URI_LOCAL}advencedSearch`,
-        //this.searchResultService.getAdvencedSearchResults$(`${URI}advencedSearch`,
+        //this.searchResultService.getAdvencedSearchResults$(`${URI_LOCAL}advencedSearch`,
+        this.searchResultService.getAdvencedSearchResults$(`${URI}advencedSearch`,
           {
             regEx: param.pattern,
             fast: param.fast

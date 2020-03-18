@@ -27,7 +27,7 @@ export class FormResearchComponent implements OnInit {
     this.activatedRoute.queryParams.pipe().subscribe(param => {
       if (param.fast) {this.fast = param.fast === 'true' ? 'true' : 'false'; }
     });
-    this.options$ = this.http.get<string[]>(`${URI_LOCAL}autoComplete`);
-    //this.options$ = this.http.get<string[]>(`${URI}autoComplete`);
+    //this.options$ = this.http.get<string[]>(`${URI_LOCAL}autoComplete`);
+    this.options$ = this.http.get<string[]>(`${URI}autoComplete`);
   }
 }
