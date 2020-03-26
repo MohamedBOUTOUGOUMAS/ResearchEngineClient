@@ -20,7 +20,8 @@ const paginate = require('jw-paginate');
   <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
       <a (click)="setPage(pager.totalPages)" class="page-link">Last</a>
   </li>
-</ul>`
+</ul>`,
+  styles: ['ul li { cursor:pointer; }']
 })
 
 export class JwPaginationComponent implements OnInit, OnChanges {

@@ -36,6 +36,12 @@ export class SearchResultService {
     return this.searchResults$;
   }
 
+  public getAdvencedPlusSearchResults$(url: string, payload: any): Observable<Array<ISearchResult>> {
+    if (this.searchResults$ && !url) { return this.searchResults$; }
+    this.searchResults$ = this.http.post<Array<ISearchResult>>(url, payload);
+    return this.searchResults$;
+  }
+
   public getSuggestions$(url: string): Observable<Array<ISearchResult>> {
     return this.http.get<Array<ISearchResult>>(url);
   }

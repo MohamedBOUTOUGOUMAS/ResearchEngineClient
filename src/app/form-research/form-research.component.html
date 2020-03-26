@@ -48,9 +48,8 @@
                 <div class="input-group">
                     <input [(ngModel)]="pattern"
                            [matAutocomplete]="auto"
-                           [formControl]="myControl"
+                           [disabled]="advencedSearch"
                            matInput
-                           (focus)="advencedSearch = false"
                            type="text"
                            class="form-control"
                            name="recherche"
@@ -77,13 +76,11 @@
                 <i class="fa" [ngClass]="{'fa-minus': advencedSearch, 'fa-plus': !advencedSearch}"></i>
             </a>
 
-            <div>
+            <div *ngIf="advencedSearch">
                 <form>
-                    <div *ngIf="advencedSearch"
-                         class="input-group mt-3">
+                    <div class="input-group mt-3">
                         <input [(ngModel)]="advencedInput"
                                [matAutocomplete]="auto2"
-                               [formControl]="myControl"
                                matInput
                                class="form-control"
                                style="border-radius: 0px"
@@ -104,6 +101,37 @@
                         </div>
                     </div>
                 </form>
+
+                <div>
+                    <section style="margin-top: 20px;">
+                        <span class="blockquote-footer" style="margin-bottom: 10px">Rechercher avec</span>
+                        <mat-radio-group [(ngModel)]="advancedMode" >
+                            <mat-radio-button style="display: block; width: fit-content; font-size: 11px; margin-bottom: 10px" value="title">
+                                Le titre du livre</mat-radio-button>
+                            <mat-radio-button style="display: block; width: fit-content; font-size: 11px" value="author">
+                                L'auteur du livre</mat-radio-button>
+                        </mat-radio-group>
+                    </section>
+                </div>
+                <form>
+                    <div class="input-group mt-3">
+                        <input [(ngModel)]="advencedInputMetadata"
+                               class="form-control"
+                               style="border-radius: 0px"
+                               name="rechercheAvancee"
+                               placeholder="Titre/Auteur">
+                        <div class="input-group-append">
+                            <button type="submit"
+                                    class="btn btn-outline-secondary"
+                                    style="border-radius: 0px"
+                                    [routerLink]="['/search']"
+                                    [queryParams]="{ pattern: advencedInputMetadata, advenced: true, metadata: advancedMode, classification: classification }">
+                                Rechercher
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>

@@ -15,11 +15,13 @@ export class FormResearchComponent implements OnInit {
   public pattern: string;
   public advencedSearch = false;
   public advencedInput: string;
+  public advencedInputMetadata: string;
   public fast = 'false';
   public options$: Observable<string[]>;
   public myControl = new FormControl();
   public searchSource = 'index';
   public classification = 'nbOccurs';
+  public advancedMode = '';
 
   constructor(private activatedRoute: ActivatedRoute, private http: HttpClient) {}
 
