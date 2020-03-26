@@ -1,10 +1,18 @@
-<div class="row">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6 mt-5">
-        <p *ngFor="let line of book?.content"
-           style="text-align: justify"
-           [innerHTML]="line">
-        </p>
+<div class="container-fluid">
+    <div *ngIf="book?.content.length === 0"
+         class="mt-5">
+        <p class="text-primary ml-3" style="text-align: center"> Coloration en cours !</p>
+        <p class="p-2"><ngb-progressbar type="success" textType="white" [value]="progress" [showValue]="true"></ngb-progressbar></p>
     </div>
-    <div class="col-lg-3"></div>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div *ngIf="progress === 100" class="col-lg-6 mt-5">
+            <p *ngFor="let line of book?.content"
+               style="text-align: justify"
+               [innerHTML]="line">
+            </p>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
 </div>
+

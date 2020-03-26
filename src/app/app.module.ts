@@ -10,6 +10,7 @@ import {
 } from '@angular/material';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
+import {NgbProgressbar} from '@ng-bootstrap/ng-bootstrap';
 
 
 import {AppComponent} from './app.component';
@@ -59,7 +60,8 @@ import { SuggestionsCarouselComponent } from './suggestions-carousel/suggestions
     ],
     providers: [SearchResultService, ColorWord, SearchFilter,
         { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
-        NgbPopoverConfig
+        NgbPopoverConfig,
+        NgbProgressbar
     ],
     bootstrap: [AppComponent]
 })

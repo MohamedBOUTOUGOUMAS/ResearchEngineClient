@@ -1,53 +1,49 @@
 <div class="container p-5"
      [ngClass]="styles"
      style="border: 1px solid #e1e1e1; border-radius: 5px">
-    <div class="row" style="margin-bottom: 20px; display: flex; justify-content: center;">
-        <ng-template #popContent>
-            <mat-card>
-                <mat-card-content>
-                    <section style="font-size: 10px">
-                        <h5 style="margin-bottom: 10px">Le mode de recherche</h5>
-                        <mat-radio-group [(ngModel)]="fast">
-                            <mat-radio-button style="margin-right: 5px" value="false">Basique</mat-radio-button>
-                            <mat-radio-button style="margin-right: 5px" value="true">Rapide</mat-radio-button>
-                        </mat-radio-group>
-                    </section>
+    <ng-template #popContent>
 
-                    <section style="font-size: 10px; margin-top: 20px">
-                        <h5 style="margin-bottom: 10px">Source</h5>
-                        <mat-radio-group [(ngModel)]="searchSource" [disabled]="fast === 'false'">
-                            <mat-radio-button style="margin-right: 5px" value="db">Base de données</mat-radio-button>
-                            <mat-radio-button style="margin-right: 5px" value="index">Index</mat-radio-button>
-                        </mat-radio-group>
-                    </section>
-                    <section style="margin-top: 20px; font-size: 10px">
-                        <h5 style="margin-bottom: 10px">Classification</h5>
-                        <mat-radio-group [(ngModel)]="classification">
-                            <mat-radio-button style="display: block" value="btw">Betweeness</mat-radio-button>
-                            <mat-radio-button style="display: block" value="pgr">Page-rank</mat-radio-button>
-                            <mat-radio-button style="display: block" value="nbOccurs">Nombre de mots trouvés</mat-radio-button>
-                            <mat-radio-button style="display: block" value="nbClick">Livre le plus consulté</mat-radio-button>
-                        </mat-radio-group>
-                    </section>
-                </mat-card-content>
-            </mat-card>
+        <section style="font-size: 10px">
+            <h5 style="margin-bottom: 10px">Le mode de recherche</h5>
+            <mat-radio-group [(ngModel)]="fast">
+                <mat-radio-button style="margin-right: 5px" value="false">Basique</mat-radio-button>
+                <mat-radio-button style="margin-right: 5px" value="true">Rapide</mat-radio-button>
+            </mat-radio-group>
+        </section>
 
-        </ng-template>
-        <ng-template #popTitle>
-            <h4 style="text-align: center;">
-                Configuration de la recherche</h4>
-        </ng-template>
-        <button type="button" class="btn btn-outline-secondary"
-                [ngbPopover]="popContent"
-                [popoverTitle]="popTitle"
-                [autoClose]="'outside'"
-                [container]="'body'">
-            <i class="fa fa-cog"></i>
-        </button>
+        <section style="font-size: 10px; margin-top: 20px">
+            <h5 style="margin-bottom: 10px">Source</h5>
+            <mat-radio-group [(ngModel)]="searchSource" [disabled]="fast === 'false'">
+                <mat-radio-button style="margin-right: 5px" value="db">Base de données</mat-radio-button>
+                <mat-radio-button style="margin-right: 5px" value="index">Index</mat-radio-button>
+            </mat-radio-group>
+        </section>
+        <section style="margin-top: 20px; font-size: 10px">
+            <h5 style="margin-bottom: 10px">Classification</h5>
+            <mat-radio-group [(ngModel)]="classification">
+                <mat-radio-button style="display: block" value="btw">Betweeness</mat-radio-button>
+                <mat-radio-button style="display: block" value="pgr">Page-rank</mat-radio-button>
+                <mat-radio-button style="display: block" value="nbOccurs">Nombre de mots trouvés
+                </mat-radio-button>
+                <mat-radio-button style="display: block" value="nbClick">Livre le plus consulté
+                </mat-radio-button>
+            </mat-radio-group>
+        </section>
 
-    </div>
+    </ng-template>
+
     <div class="row">
         <div style="width: 100%">
+            <a href="#" class="blockquote-footer mb-4"
+               style="width: fit-content"
+               [ngbPopover]="popContent"
+               [autoClose]="'outside'"
+               [popoverClass]="'p-3'"
+               [container]="'body'"
+               placement="bottom"
+               (click)="$event.preventDefault();">
+                <i class="fa fa-cog"></i> Configurer la recherche
+            </a>
             <form class="mb-3">
                 <div class="input-group">
                     <input [(ngModel)]="pattern"
@@ -68,7 +64,8 @@
                         <button type="submit"
                                 class="btn btn-outline-secondary"
                                 style="border-radius: 0px"
-                                [routerLink]="['/search']" [queryParams]="{ pattern: pattern, fast: fast, searchSource: searchSource, classification: classification }">
+                                [routerLink]="['/search']"
+                                [queryParams]="{ pattern: pattern, fast: fast, searchSource: searchSource, classification: classification }">
                             Rechercher
                         </button>
                     </div>
@@ -80,7 +77,7 @@
                 <i class="fa" [ngClass]="{'fa-minus': advencedSearch, 'fa-plus': !advencedSearch}"></i>
             </a>
 
-            <div class="d-flex justify-content-center">
+            <div>
                 <form>
                     <div *ngIf="advencedSearch"
                          class="input-group mt-3">
