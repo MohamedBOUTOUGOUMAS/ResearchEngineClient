@@ -28,7 +28,6 @@ export class BookPage implements OnInit {
         this.activatedRoute.queryParams .pipe().subscribe(param => {
             if (param.fileName && param.pattern) {
                 //this.searchResultService.getBook(`${URI_LOCAL}search/book?fileName=${param.fileName}`)
-                //.pipe().subscribe(book => {this.book = this.colorPipe.transform(book, param.pattern); this.progress = 100; });
                 this.searchResultService.getBook(`${URI}search/book?fileName=${param.fileName}`)
                 .pipe().subscribe(book => {this.book = this.colorPipe.transform(book, param.pattern); this.progress = 100; });
             }

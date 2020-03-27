@@ -4,6 +4,7 @@ export interface IBook {
     fileName: string;
     releaseDate: string;
     content: string[];
+    imageUrl?: string;
 }
 
 export interface ISearchResult extends IBook {

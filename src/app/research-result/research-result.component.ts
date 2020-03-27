@@ -4,11 +4,10 @@ import {ISearchResult} from '../topics/Interfaces';
 import {SearchResultService} from '../services/search-result.service';
 import {URI, URI_LOCAL} from '../topics/Interfaces';
 
-
 @Component({
     selector: 'app-research-result',
     templateUrl: './research-result.component.html',
-    styles: ['']
+    styles: ['.card:hover{ background-color: #e1e1e1; cursor:pointer;}']
 })
 export class ResearchResultComponent implements OnInit {
 
@@ -22,7 +21,7 @@ export class ResearchResultComponent implements OnInit {
     }
 
     public onChangePage(pageOfItems: Array<ISearchResult>) {
-        this.pageOfItems = pageOfItems;
+        this.pageOfItems = this.searchResultService.decorateWithPicture(pageOfItems);
     }
 
     public initData() {

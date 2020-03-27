@@ -6,19 +6,19 @@ const paginate = require('jw-paginate');
   selector: 'app-jw-pagination',
   template: `<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
   <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
-      <a (click)="setPage(1)" class="page-link">First</a>
+      <a (click)="setPage(1)" class="page-link">Premier</a>
   </li>
   <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
-      <a (click)="setPage(pager.currentPage - 1)" class="page-link">Previous</a>
+      <a (click)="setPage(pager.currentPage - 1)" class="page-link">Précédent</a>
   </li>
   <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
       <a (click)="setPage(page)" class="page-link">{{page}}</a>
   </li>
   <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
-      <a (click)="setPage(pager.currentPage + 1)" class="page-link">Next</a>
+      <a (click)="setPage(pager.currentPage + 1)" class="page-link">Suivant</a>
   </li>
   <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
-      <a (click)="setPage(pager.totalPages)" class="page-link">Last</a>
+      <a (click)="setPage(pager.totalPages)" class="page-link">Dernier</a>
   </li>
 </ul>`,
   styles: ['ul li { cursor:pointer; }']

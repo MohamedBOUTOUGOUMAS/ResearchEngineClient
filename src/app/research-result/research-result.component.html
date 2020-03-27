@@ -12,53 +12,60 @@
     <div class="col-lg-6">
       <div class="container mt-3">
         <app-form-research></app-form-research>
-        <div class="card text-center mt-3">
-          <div class="card-body" style="text-align: justify">
-            <ul style="list-style-type: none;">
-              <ng-container *ngFor="let searchResult of pageOfItems">
-                <li *ngIf="searchResult.book.title"
-                    style="margin-bottom: 10px; padding: 10px; border: 1px solid #e1e1e1">
-                  <a class="text-dark"
-                     href=""
-                     (click)="showDetails === searchResult.book.fileName ?
-                  showDetails = null : showDetails = searchResult.book.fileName;
-                  $event.preventDefault()">
-                    {{searchResult.book.title}}</a>
-                  <div class="container"
-                       *ngIf="showDetails === searchResult.book.fileName"
-                       style="margin-top: 10px">
-                    <p class="blockquote-footer">Author: {{searchResult.book.author}}</p>
-                    <p class="blockquote-footer">Release date: {{searchResult.book.releaseDate}}</p>
-                    <a class="text-primary"
-                       [routerLink]="['/search/book']"
-                       [queryParams]="{ fileName: searchResult.book.fileName, pattern: pattern}">
-                      Lire le livre</a>
-                    <app-suggestions [fileName]="searchResult.book.fileName" [pattern]="pattern" ></app-suggestions>
-                  </div>
-                </li>
-              </ng-container>
-
-              <div *ngIf="requestStatus === 0"
-                   class="d-flex justify-content-center">
-                <div class="spinner-border spinner-border-sm" role="status">
-                  <span class="sr-only">Loading...</span>
-                </div>
-              </div>
-
-              <div *ngIf="(!pageOfItems || pageOfItems.length === 0) && requestStatus === 1" class="card">
-                <div class="card-body">
-                  Aucun résultat trouvé pour "{{pattern}}"
-                </div>
-              </div>
-            </ul>
-          </div>
-          <div class="card-footer pb-0 pt-3">
-            <app-jw-pagination [pageSize]="50" [items]="searchResults" (changePage)="onChangePage($event)"></app-jw-pagination>
-          </div>
-        </div>
       </div>
     </div>
     <div class="col-lg-3"></div>
+  </div>
+
+  <div class="row">
+    <div class="m-3" style="width: 100%; border: 1px solid #e1e1e1; border-radius: 5px">
+      <div class="card-body">
+        <ul class="d-flex flex-wrap justify-content-center" style="list-style-type: none; padding: 0">
+          <ng-container *ngFor="let searchResult of pageOfItems">
+            <li *ngIf="searchResult.book.title" class="m-4" style="height: fit-content; box-shadow: 1px 4px 4px #e1e1e1">
+              <a class="card" style="width: 15rem;"
+                 (click)="showDetails === searchResult.book.fileName ?
+                          showDetails = null : showDetails = searchResult.book.fileName;
+                          $event.preventDefault()">
+                <img class="card-img-top"
+                     [src]="searchResult.book.imageUrl === '' ? '../../assets/default.jpg': searchResult.book.imageUrl"
+                     height="300px" alt="Card image cap">
+                <div class="card-body" style="height: 150px;">
+                  <p class="card-text text-dark">{{searchResult.book.title}}</p>
+                </div>
+              </a>
+
+              <div *ngIf="showDetails === searchResult.book.fileName"
+                   style="margin-top: 10px; width: 240px;">
+                <p class="blockquote-footer pl-2">Author: {{searchResult.book.author}}</p>
+                <p class="blockquote-footer pl-2">Release date: {{searchResult.book.releaseDate}}</p>
+                <a class="text-primary pl-2"
+                   [routerLink]="['/search/book']"
+                   [queryParams]="{ fileName: searchResult.book.fileName, pattern: pattern}">
+                  Lire le livre</a>
+                <app-suggestions [fileName]="searchResult.book.fileName" [pattern]="pattern" ></app-suggestions>
+              </div>
+            </li>
+          </ng-container>
+
+          <div *ngIf="requestStatus === 0"
+               class="d-flex justify-content-center">
+            <div class="spinner-border spinner-border-sm" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+
+          <div *ngIf="(!pageOfItems || pageOfItems.length === 0) && requestStatus === 1" class="card">
+            <div class="card-body">
+              Aucun résultat trouvé pour "{{pattern}}"
+            </div>
+          </div>
+        </ul>
+      </div>
+      <div class="card-footer pb-0 pt-3 d-flex justify-content-center">
+        <app-jw-pagination [pageSize]="12" [items]="searchResults" (changePage)="onChangePage($event)"></app-jw-pagination>
+      </div>
+    </div>
   </div>
 
 </div>
