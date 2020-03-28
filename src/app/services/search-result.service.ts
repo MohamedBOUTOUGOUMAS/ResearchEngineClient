@@ -65,7 +65,6 @@ export class SearchResultService {
         results.map(sr => {
             if (sr !== null) {
                 const headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
-
                 this.http.get(`https://gutendex.com/books/${this.getFileName(sr.book.fileName)}/`, {headers})
                     .pipe()
                     .subscribe(r => {

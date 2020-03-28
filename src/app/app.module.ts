@@ -27,6 +27,7 @@ import {SearchFilter} from './pipes/search-filtering.pipe';
 import {JwPaginationComponent} from './jw-pagination-custom/jw-pagination.component';
 import { SuggestionsComponent } from './suggestions/suggestions.component';
 import { SuggestionsCarouselComponent } from './suggestions-carousel/suggestions-carousel.component';
+import {RegExFilter} from './pipes/regEx-filtering.pipe';
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import { SuggestionsCarouselComponent } from './suggestions-carousel/suggestions
         ColorWord,
         JwPaginationComponent,
         SearchFilter,
+        RegExFilter,
         SuggestionsComponent,
         SuggestionsCarouselComponent,
     ],
@@ -58,7 +60,7 @@ import { SuggestionsCarouselComponent } from './suggestions-carousel/suggestions
         MatRadioModule,
         MatCardModule,
     ],
-    providers: [SearchResultService, ColorWord, SearchFilter,
+    providers: [SearchResultService, ColorWord, SearchFilter, RegExFilter,
         { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
         NgbPopoverConfig,
         NgbProgressbar

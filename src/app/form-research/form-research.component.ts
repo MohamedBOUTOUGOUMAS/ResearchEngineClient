@@ -16,7 +16,7 @@ export class FormResearchComponent implements OnInit {
   public advencedSearch = false;
   public advencedInput: string;
   public advencedInputMetadata: string;
-  public fast = 'false';
+  public fast = 'true';
   public options$: Observable<string[]>;
   public myControl = new FormControl();
   public searchSource = 'index';

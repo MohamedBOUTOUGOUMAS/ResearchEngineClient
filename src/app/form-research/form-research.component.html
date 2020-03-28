@@ -56,7 +56,7 @@
                            placeholder="recherche ..."
                            style="border-radius: 0px">
                     <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of (options$ | async | searchFilter:pattern)"
+                        <mat-option *ngFor="let option of (options$ | async | searchFilter:pattern | regExFilter:false)"
                                     [value]="option">{{option}}</mat-option>
                     </mat-autocomplete>
                     <div class="input-group-append">
@@ -71,8 +71,10 @@
                 </div>
             </form>
 
-            <a class="blockquote-footer" href="" (click)="$event.preventDefault();
-                    advencedSearch = !advencedSearch">Recherche avancée
+            <a class="blockquote-footer" href=""
+               (click)="$event.preventDefault();advencedSearch = !advencedSearch"
+               style="width: fit-content">
+                Recherche avancée
                 <i class="fa" [ngClass]="{'fa-minus': advencedSearch, 'fa-plus': !advencedSearch}"></i>
             </a>
 
@@ -81,13 +83,14 @@
                     <div class="input-group mt-3">
                         <input [(ngModel)]="advencedInput"
                                [matAutocomplete]="auto2"
+                               [disabled]="advancedMode !== ''"
                                matInput
                                class="form-control"
                                style="border-radius: 0px"
                                name="rechercheAvancee"
                                placeholder="Entrez une expression reguliere">
                         <mat-autocomplete #auto2="matAutocomplete">
-                            <mat-option *ngFor="let option of (options$ | async |searchFilter:advencedInput)"
+                            <mat-option *ngFor="let option of (options$ | async | searchFilter:advencedInput | regExFilter:true)"
                                         [value]="option">{{option}}</mat-option>
                         </mat-autocomplete>
                         <div class="input-group-append">
@@ -111,9 +114,14 @@
                                     value="title">
                                 Le titre du livre
                             </mat-radio-button>
-                            <mat-radio-button style="display: block; width: fit-content; font-size: 11px"
+                            <mat-radio-button style="display: block; width: fit-content; font-size: 11px; margin-bottom: 10px"
                                               value="author">
                                 L'auteur du livre
+                            </mat-radio-button>
+                            <mat-radio-button
+                                    style="display: block; width: fit-content; font-size: 11px"
+                                    value="">
+                                Aucun des deux
                             </mat-radio-button>
                         </mat-radio-group>
                     </section>
@@ -121,6 +129,7 @@
                 <form>
                     <div class="input-group mt-3">
                         <input [(ngModel)]="advencedInputMetadata"
+                               [disabled]="advancedMode === ''"
                                class="form-control"
                                style="border-radius: 0px"
                                name="rechercheAvancee"
