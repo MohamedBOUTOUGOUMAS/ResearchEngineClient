@@ -17,8 +17,8 @@
     <div class="col-lg-3"></div>
   </div>
 
-  <div class="row">
-    <div class="m-3" style="width: 100%; border: 1px solid #e1e1e1; border-radius: 5px">
+  <div class="row p-3">
+    <div style="width: 100%; border: 1px solid #e1e1e1; border-radius: 5px">
       <div class="card-body">
         <ul class="d-flex flex-wrap justify-content-center" style="list-style-type: none; padding: 0">
           <ng-container *ngFor="let searchResult of pageOfItems">
@@ -63,7 +63,10 @@
         </ul>
       </div>
       <div class="card-footer pb-0 pt-3 d-flex justify-content-center">
-        <app-jw-pagination [pageSize]="12" [items]="searchResults" (changePage)="onChangePage($event)"></app-jw-pagination>
+        <app-jw-pagination [pageSize]="12"
+                           [items]="searchResults"
+                           (changePage)="onChangePage($event)"
+                           style="overflow: auto"></app-jw-pagination>
       </div>
     </div>
   </div>

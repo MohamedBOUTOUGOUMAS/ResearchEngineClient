@@ -19,7 +19,7 @@ export class FormResearchComponent implements OnInit {
   public fast = 'true';
   public options$: Observable<string[]>;
   public myControl = new FormControl();
-  public searchSource = 'index';
+  public searchSource = 'db';
   public classification = 'nbOccurs';
   public advancedMode = '';
 

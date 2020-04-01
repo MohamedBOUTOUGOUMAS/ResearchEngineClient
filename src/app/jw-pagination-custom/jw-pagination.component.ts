@@ -29,7 +29,7 @@ export class JwPaginationComponent implements OnInit, OnChanges {
   @Output() changePage = new EventEmitter<any>(true);
   @Input() initialPage = 1;
   @Input() pageSize = 10;
-  @Input() maxPages = 10;
+  @Input() maxPages = 5;
 
   pager: any = {};
 
@@ -52,7 +52,7 @@ export class JwPaginationComponent implements OnInit, OnChanges {
     this.pager = paginate(this.items.length, page, this.pageSize, this.maxPages);
 
     // get new page of items from items array
-    var pageOfItems = this.items.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    const pageOfItems = this.items.slice(this.pager.startIndex, this.pager.endIndex + 1);
 
     // call change page function in parent component
     this.changePage.emit(pageOfItems);
